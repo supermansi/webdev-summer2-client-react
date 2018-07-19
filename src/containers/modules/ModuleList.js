@@ -18,13 +18,14 @@ export default class ModuleList extends React.Component {
     }
 
     setCourseId(courseId) {
-        this.setCourseId({courseId: courseId});
+        this.setState({courseId: courseId});
     }
 
     setModuleTitle(event) {
-        this.setState({module: {
+        console.log(event);
+    /*    this.setState({module: {
             title : event.target.value
-            }})
+            }})*/
     }
 
     createModule() {

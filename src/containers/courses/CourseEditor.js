@@ -15,6 +15,7 @@ export default class CourseEditor extends React.Component {
     }
 
     render() {
+        console.log("from course editor");
         return(
             <div>
                 <h3>Course {this.state.courseId}</h3>

@@ -32,6 +32,13 @@ export default class ModuleService extends React.Component {
             });
     }
 
+    findModuleById(moduleId) {
+        return fetch(MODULE_ID_URL + '/' + moduleId)
+            .then(function(response){
+                return response.json();
+            });
+    }
+
     findAllModulesForCourse(courseId) {
         return  fetch(MODULE_API_URL.replace('COURSE_ID', courseId))
             .then(function(response){

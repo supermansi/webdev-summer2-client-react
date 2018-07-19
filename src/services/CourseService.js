@@ -17,6 +17,13 @@ class CourseService {
         this.findAllCourses();
     }
 
+    findCourseById(courseId) {
+        return fetch(COURSE_API_URL + "/" + courseId)
+            .then(function(response){
+                return response.json();
+            });
+    }
+
     findAllCourses(){
         return fetch(COURSE_API_URL)
             .then((response)=>(
@@ -40,7 +47,7 @@ class CourseService {
     }
 
     deleteCourse(courseId) {
-        console.log("delete?" + courseId);
+        //console.log("delete?" + courseId);
         return fetch(COURSE_API_URL + '/' + courseId, {
             method : 'DELETE'
         }).then(function(response){

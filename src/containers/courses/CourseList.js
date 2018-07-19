@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import CourseRow from "../../components/CourseRow";
 import CourseService from "../../services/CourseService";
+import CourseEditor from "./CourseEditor";
 
 export default class CourseList extends React.Component {
 
@@ -61,33 +63,39 @@ export default class CourseList extends React.Component {
 
     render() {
         return(
-            <div className="container">
-                <h4>Course List</h4>
-                <table className="table-bordered table-hover col-4">
-                    <thead>
-                        <tr>
-                            <th>Course</th>
-                        </tr>
-                        <tr className="row">
-                            <th className="col-8">
-                                <input className="form-control"
-                                    id="titleFld"
-                                   placeholder="CS 5610"
-                                    onChange={this.titleChanged}/>
-                            </th>
-                            <th className="col-4">
-                                <button className="btn btn-primary"
-                                    onClick={this.createCourse}>
-                                    <i className="fa fa-plus"></i>
-                                </button>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.courseRows()}
-                    </tbody>
-                </table>
-            </div>
+            <Router>
+                <div className="container row">
+                    <div className="col-4 border">
+                        <h4>Course List</h4>
+                        <table className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input className="form-control"
+                                            id="titleFld"
+                                            placeholder="New Course"
+                                            onChange={this.titleChanged}/>
+                                    </th>
+                                    <th>
+                                        <button className="btn btn-primary"
+                                            onClick={this.createCourse}>
+                                            <i className="fa fa-plus"></i>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.courseRows()}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="col-8 border">
+                        <Route path="/course/:courseId/edit"
+                               component={CourseEditor}>
+                        </Route>
+                    </div>
+                </div>
+            </Router>
         );
     }
 }
