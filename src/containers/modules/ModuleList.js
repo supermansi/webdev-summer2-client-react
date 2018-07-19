@@ -1,5 +1,6 @@
 import React from  'react'
 import ModuleService from '../../services/ModuleService'
+import ModuleListItem from '../../components/ModuleListItem'
 
 export default class ModuleList extends React.Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export default class ModuleList extends React.Component {
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleTitle = this.setModuleTitle.bind(this);
         this.createModule = this.createModule.bind(this);
+        this.deleteModule = this.deleteModule.bind(this);
         this.moduleService = ModuleService.instance;
     }
 
@@ -29,6 +31,15 @@ export default class ModuleList extends React.Component {
             .createModule(this.state.courseId,
                             this.state.module)
             .then(() => this.findAllModulesForCourse(this.state.courseId));
+    }
+
+    deleteModule(moduleId) {
+        console.log("deleting module " + moduleId);
+        this.moduleService
+            .deleteModule(moduleId)
+            .then(() => {
+                this.findAllModulesForCourse(this.state.courseId)
+            });
     }
 
     findAllModulesForCourse(courseId) {
@@ -55,9 +66,12 @@ export default class ModuleList extends React.Component {
     renderModules() {
         let modules = this.state.modules.map((module) => {
             return (
-                <li key={module.id}>{module.title}</li>
+                <ModuleListItem key={module.id}
+                                module={module}
+                                delete={this.deleteModule}/>
             );
-        })
+        });
+
         return (
             <div>
                 <h1>Modules</h1>

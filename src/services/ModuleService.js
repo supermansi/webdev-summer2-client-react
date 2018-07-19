@@ -2,6 +2,7 @@ import React from 'react'
 
 let _singleton = Symbol();
 const MODULE_API_URL = 'http://localhost:8080/api/course/CID/module';
+const MODULE_ID_URL = 'http://localhost:8080/api/module/MODULE_ID';
 
 export default class ModuleService extends React.Component {
     constructor(singletonToken) {
@@ -22,6 +23,13 @@ export default class ModuleService extends React.Component {
                 method: 'POST'
             }).then(function (response)
         { return response.json(); })
+    }
+
+    deleteModule(moduleId) {
+        return fetch(MODULE_ID_URL.replace('MODULE_ID', moduleId),
+            {
+                "method" : "DELETE"
+            });
     }
 
     findAllModulesForCourse(courseId) {
