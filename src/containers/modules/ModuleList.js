@@ -1,6 +1,8 @@
 import React from  'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import ModuleService from '../../services/ModuleService'
 import ModuleListItem from '../../components/ModuleListItem'
+import ModuleEditor from './ModuleEditor'
 
 export default class ModuleList extends React.Component {
     constructor(props) {
@@ -84,17 +86,25 @@ export default class ModuleList extends React.Component {
 
     render(){
         return(
-            <div>
-                <h4>Module List</h4>
-                <h4>Modules courseId: {this.state.courseId} </h4>
+            <Router>
+                <div className="row">
+                    <div className="col-4">
+                        <h4>Module List</h4>
+                        <h4>Modules courseId: {this.state.courseId} </h4>
 
-                <input placeholder="New Module"
-                        value={this.state.module.title}
-                        onChange = {this.setModuleTitle()}/>
-                <button onClick={this.createModule}>Create</button>
+                        <input placeholder="New Module"
+                                value={this.state.module.title}
+                                onChange = {this.setModuleTitle()}/>
+                        <button onClick={this.createModule}>Create</button>
 
-                {this.renderModules()}
-            </div>
+                        {this.renderModules()}
+                    </div>
+                    <div className="col-8">
+                        <Route path="/course/:courseId/module/:moduleId"
+                                component={ModuleEditor}/>
+                    </div>
+                </div>
+            </Router>
         );
     }
 }
