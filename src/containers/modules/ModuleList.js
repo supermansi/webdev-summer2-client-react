@@ -22,10 +22,10 @@ export default class ModuleList extends React.Component {
     }
 
     setModuleTitle(event) {
-        console.log(event);
-    /*    this.setState({module: {
+        //console.log(event);
+        this.setState({module: {
             title : event.target.value
-            }})*/
+            }});
     }
 
     createModule() {
@@ -58,12 +58,19 @@ export default class ModuleList extends React.Component {
     }
 
     componentDidMount() {
-        this.setCourseId(this.props.courseId);
+        console.log(this.props);
+        this.setCourseId(
+            this.props.match.params.courseId);
+        this.setModuleId(
+            this.props.match.params.moduleId);
     }
 
     componentWillReceiveProps(newProps) {
-        this.setCourseId(newProps.courseId);
         this.findAllModulesForCourse(newProps.courseId);
+        this.setCourseId(
+            newProps.match.params.courseId);
+        this.setModuleId(
+            newProps.match.params.moduleId);
     }
 
     renderModules() {
@@ -91,11 +98,11 @@ export default class ModuleList extends React.Component {
                 <div className="row">
                     <div className="col-4">
                         <h4>Module List</h4>
-                        <h4>Modules courseId: {this.state.courseId} </h4>
+                        <h4>Modules {this.state.courseId} </h4>
 
                         <input placeholder="New Module"
-                                value={this.state.module.title}
-                                onChange = {this.setModuleTitle()}/>
+                                onChange = {this.setModuleTitle}
+                               value={this.state.module.title}/>
                         <button onClick={this.createModule}>Create</button>
 
                         {this.renderModules()}

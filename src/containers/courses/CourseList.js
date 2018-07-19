@@ -37,6 +37,7 @@ export default class CourseList extends React.Component {
 
     componentDidMount() {
         this.findAllCourses();
+
     }
 
     findAllCourses() {
@@ -53,11 +54,13 @@ export default class CourseList extends React.Component {
             .then(() => {this.findAllCourses()});
     }
 
-
     courseRows() {
-        var rows = this.state.courses.map(course => <CourseRow course={course}
-                                                                key={course.id}
-                                                                delete={this.deleteCourse}/>);
+        var rows = this.state.courses.map(course =>
+                <CourseRow course={course}
+                           key={course.id}
+                           delete={this.deleteCourse}
+            />
+        );
         return rows;
     }
 
@@ -65,7 +68,7 @@ export default class CourseList extends React.Component {
         return(
             <Router>
                 <div className="container row">
-                    <div className="col-4 border">
+                    <div className="col-8 border">
                         <h4>Course List</h4>
                         <table className="table table-hover">
                             <thead>
@@ -89,11 +92,11 @@ export default class CourseList extends React.Component {
                             </tbody>
                         </table>
                     </div>
-                    <div className="col-8 border">
+{/*                    <div className="col-8 border">
                         <Route path="/course/:courseId/edit"
                                component={CourseEditor}>
                         </Route>
-                    </div>
+                    </div>*/}
                 </div>
             </Router>
         );

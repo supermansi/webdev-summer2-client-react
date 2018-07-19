@@ -11,6 +11,7 @@ export default class CourseEditor extends React.Component {
     }
 
     selectCourse(courseId) {
+        console.log(courseId)
         this.setState({courseId : courseId});
     }
 

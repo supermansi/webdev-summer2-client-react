@@ -16,6 +16,18 @@ export default class LessonService extends React.Component {
         return this[_singleton]
     }
 
+    findAllLessons() {
+        return fetch(
+            LESSON_ID_URL,
+            {
+                "method" : "GET",
+                "headers" : {
+                    "content-type" : "application/json"
+                }
+            }
+        );
+    }
+
     findAllLessonsForModule(courseId, moduleId) {
         return fetch(
             LESSON_API_URL

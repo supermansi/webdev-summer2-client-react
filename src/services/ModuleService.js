@@ -17,6 +17,7 @@ export default class ModuleService extends React.Component {
     }
 
     createModule(courseId, module) {
+        console.log(courseId);
         return fetch(MODULE_API_URL.replace('CID', courseId),
             {   body: JSON.stringify(module),
                 headers: { 'Content-Type': 'application/json' },
