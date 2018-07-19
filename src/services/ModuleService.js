@@ -26,7 +26,9 @@ export default class ModuleService extends React.Component {
     }
 
     deleteModule(moduleId) {
-        return fetch(MODULE_ID_URL.replace('MODULE_ID', moduleId),
+        return fetch(
+            MODULE_ID_URL
+                .replace('MODULE_ID', moduleId),
             {
                 "method" : "DELETE"
             });
