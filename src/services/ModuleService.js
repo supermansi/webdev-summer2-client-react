@@ -1,12 +1,9 @@
-import React from 'react'
-
 let _singleton = Symbol();
 const MODULE_API_URL = 'http://localhost:8080/api/course/CID/module';
 const MODULE_ID_URL = 'http://localhost:8080/api/module/MODULE_ID';
 
-export default class ModuleService extends React.Component {
+export default class ModuleService {
     constructor(singletonToken) {
-        super();
         if (_singleton !== singletonToken)
             throw new Error('Singleton!!!');
     }
@@ -43,7 +40,16 @@ export default class ModuleService extends React.Component {
     }
 
     findAllModulesForCourse(courseId) {
-        return  fetch(MODULE_API_URL.replace('COURSE_ID', courseId))
+        console.log("from mod serv" + courseId);
+        return  fetch(MODULE_API_URL
+            .replace('CID', courseId))
+            .then(function(response){
+                return response.json();
+            })
+    }
+
+    findAllModules() {
+        return fetch(MODULE_API_URL)
             .then(function(response){
                 return response.json();
             })

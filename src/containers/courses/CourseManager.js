@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import CourseList from "./CourseList";
 import CourseEditor from "./CourseEditor";
 
@@ -8,14 +8,15 @@ export default class CourseManager extends React.Component {
         return (
             <Router>
                 <div className="container">
-                    <h1>Course Manager</h1>
-                    <CourseList/>
+                    <Link to="/course">
+                        <h1>Course Manager</h1>
+                    </Link>
                     <Route path="/course"
                            component={CourseList}>
                     </Route>
-                    {/*<Route path="/course/:courseId/edit"
+                    <Route path="/course/:courseId/edit"
                            component={CourseEditor}>
-                    </Route>*/}
+                    </Route>
                 </div>
             </Router>
         );

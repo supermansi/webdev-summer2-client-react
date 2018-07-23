@@ -7,6 +7,7 @@ const LESSON_ID_URL = 'http://localhost:8080/api/lesson';
 
 export default class LessonService extends React.Component {
     constructor(singletonToken) {
+        super();
         if (_singleton !== singletonToken)
             throw new Error('Cannot instantiate directly.');
     }
@@ -17,15 +18,10 @@ export default class LessonService extends React.Component {
     }
 
     findAllLessons() {
-        return fetch(
-            LESSON_ID_URL,
-            {
-                "method" : "GET",
-                "headers" : {
-                    "content-type" : "application/json"
-                }
-            }
-        );
+        return fetch(LESSON_ID_URL)
+            .then(function(response){
+                return response.json();
+            });
     }
 
     findAllLessonsForModule(courseId, moduleId) {

@@ -10,17 +10,25 @@ export default class CourseEditor extends React.Component {
         };
     }
 
+    componentDidMount() {
+        var courseId = this.props.match.params.courseId;
+        this.selectCourse(courseId);
+    }
+
+    componentWillReceiveProps(newProps){
+        this.selectCourse(newProps.match.params.courseId);
+    }
+
     selectCourse(courseId) {
-        console.log(courseId)
         this.setState({courseId : courseId});
+
     }
 
     render() {
-        console.log("from course editor");
         return(
             <div>
-                <h3>Course {this.state.courseId}</h3>
-                <ModuleList courseId={this.state.courseId}/>
+                {this.state.courseId!==''&&<ModuleList courseId={this.state.courseId}/>}
+                {/*{this.state.courseId!=''&&<ModuleList courseId={this.state.courseId}/>}*/}
             </div>
         );
     }

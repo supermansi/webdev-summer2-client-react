@@ -7,9 +7,11 @@ import ModuleEditor from './ModuleEditor'
 export default class ModuleList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {courseId: '',
-        module: {title: ''},
-        modules : []};
+        this.state = {
+            courseId: '',
+            module: {title: ''},
+            modules : []
+        };
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleTitle = this.setModuleTitle.bind(this);
         this.createModule = this.createModule.bind(this);
@@ -19,7 +21,12 @@ export default class ModuleList extends React.Component {
 
     setCourseId(courseId) {
         this.setState({courseId: courseId});
+        //console.log("setting course id " + courseId);
     }
+
+/*    setModuleId(moduleId) {
+        this.setState({moduleId : moduleId});
+    }*/
 
     setModuleTitle(event) {
         //console.log(event);
@@ -29,7 +36,7 @@ export default class ModuleList extends React.Component {
     }
 
     createModule() {
-        console.log(this.state);
+        //console.log(this.state);
         this.moduleService
             .createModule(this.state.courseId,
                             this.state.module)
@@ -37,7 +44,7 @@ export default class ModuleList extends React.Component {
     }
 
     deleteModule(moduleId) {
-        console.log("deleting module " + moduleId);
+        //console.log("deleting module " + moduleId);
         this.moduleService
             .deleteModule(moduleId)
             .then(() => {
@@ -58,38 +65,29 @@ export default class ModuleList extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
-        this.setCourseId(
-            this.props.match.params.courseId);
-        this.setModuleId(
-            this.props.match.params.moduleId);
+        //console.log("props" + this.props.courseId);
+        this.setCourseId(this.props.courseId);
+        //this.setModuleId(this.props.moduleId);
+        this.findAllModulesForCourse(this.props.courseId);
     }
 
     componentWillReceiveProps(newProps) {
         this.findAllModulesForCourse(newProps.courseId);
         this.setCourseId(
-            newProps.match.params.courseId);
-        this.setModuleId(
-            newProps.match.params.moduleId);
+            newProps.courseId);
+        // this.setModuleId(
+        //         //     newProps.match.params.moduleId);
     }
 
     renderModules() {
-        let modules = this.state.modules.map((module) => {
-            return (
-                <ModuleListItem key={module.id}
-                                module={module}
-                                delete={this.deleteModule}/>
-            );
-        });
-
-        return (
-            <div>
-                <h1>Modules</h1>
-                <ul>
-                    {modules}
-                </ul>
-            </div>
-        );
+        //console.log(this.state.modules);
+        var rows = this.state.modules.map(module =>
+        <ModuleListItem courseId={this.state.courseId}
+                        module={module}
+                        key = {module.id}
+                        delete = {this.deleteModule}
+        />)
+        return rows;
     }
 
     render(){
@@ -98,8 +96,7 @@ export default class ModuleList extends React.Component {
                 <div className="row">
                     <div className="col-4">
                         <h4>Module List</h4>
-                        <h4>Modules {this.state.courseId} </h4>
-
+                        {/*<h4>Modules for {this.state.courseId} </h4>*/}
                         <input placeholder="New Module"
                                 onChange = {this.setModuleTitle}
                                value={this.state.module.title}/>

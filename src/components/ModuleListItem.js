@@ -8,7 +8,7 @@ export default class ModuleListItem extends React.Component{
     render() {
         return (
             <div>
-                <Link to={`/course/${this.props.courseId}/${this.props.module.id}`}>
+                <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
                     {this.props.module.title}
                  </Link>
                 <button onClick={() =>

@@ -1,4 +1,5 @@
 import React from 'react';
+import LessonTabs from "../../components/LessonTabs";
 
 export default class ModuleEditor extends React.Component{
     constructor(props){
@@ -31,9 +32,12 @@ export default class ModuleEditor extends React.Component{
     render(){
         return(
             <div>
-                <h1>Module Editor</h1>
-                {this.state.courseId},
-                {this.state.moduleId}
+                <h1>Course ID: {this.state.courseId}
+                <br />
+                    Module {this.state.moduleId}
+                </h1>
+                <LessonTabs courseId={this.state.courseId}
+                            moduleId={this.state.moduleId}/>
             </div>
         );
     }
