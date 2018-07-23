@@ -2,6 +2,7 @@ import React from 'react'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import CourseList from "./CourseList";
 import CourseEditor from "./CourseEditor";
+import ModuleEditor from "../modules/ModuleEditor";
 
 export default class CourseManager extends React.Component {
     render() {
@@ -16,6 +17,9 @@ export default class CourseManager extends React.Component {
                     </Route>
                     <Route path="/course/:courseId/edit"
                            component={CourseEditor}>
+                    </Route>
+                    <Route path="/course/:courseId/module/:moduleId"
+                           component={ModuleEditor}>
                     </Route>
                 </div>
             </Router>

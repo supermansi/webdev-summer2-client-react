@@ -36,8 +36,8 @@ export default class ModuleEditor extends React.Component{
                 <br />
                     Module {this.state.moduleId}
                 </h1>
-                <LessonTabs courseId={this.state.courseId}
-                            moduleId={this.state.moduleId}/>
+                {this.state.moduleId!==''&&<LessonTabs courseId={this.state.courseId}
+                                                       moduleId={this.state.moduleId}/>}
             </div>
         );
     }

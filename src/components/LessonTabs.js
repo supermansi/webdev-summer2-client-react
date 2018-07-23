@@ -1,5 +1,5 @@
 import React from 'react'
-import {Router, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import LessonService from '../services/LessonService'
 
 export default class LessonTabs extends React.Component {
@@ -21,11 +21,15 @@ export default class LessonTabs extends React.Component {
     componentDidMount(){
         this.setCourseId(this.props.courseId);
         this.setModuleId(this.props.moduleId);
+        console.log(this.props.courseId);
+        console.log(this.props.moduleId);
+        this.findAllLessonsForModule(this.props.courseId, this.props.moduleId);
     }
 
     componentWillReceiveProps(newProps){
         this.setCourseId(newProps.courseId);
         this.setModuleId(newProps.moduleId);
+        this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
     }
 
     setCourseId(courseId){
@@ -46,19 +50,31 @@ export default class LessonTabs extends React.Component {
         });
     }
 
+    findAllLessonsForModule(courseId, moduleId) {
+        this.lessonService
+            .findAllLessonsForModule(courseId, moduleId)
+            .then(lessons => {this.setLessons(lessons)});
+    }
+
+    setLessons(lessons) {
+        this.setState({
+            lessons: lessons
+        })
+    }
+
     renderLessons() {
+        console.log(this.state.lessons);
         var tabs = this.state.lessons.map(lesson =>
-            return (
-                <div>
-                    <Link to={`/course/${this.state.courseId}/module/${this.props.module.id}/lesson/${this.props.lesson.id}`}>
-                        {this.state.lessonId}
-                    </Link>
-                    <button onClick={() =>
-                    {this.deleteLesson(this.state.lesson.id)}}>
-                        DELETE
-                    </button>
-                </div>
-            ))
+                    <div>
+                        <Link to={`/course/${this.state.courseId}/module/${this.props.moduleId}/lesson/${lesson.id}`}>
+                            {lesson.title}
+                        </Link>
+                        <button onClick={() =>
+                        {this.deleteLesson(lesson.id)}}>
+                            DELETE
+                        </button>
+                    </div>
+        )
         return tabs;
     }
 
@@ -69,14 +85,7 @@ export default class LessonTabs extends React.Component {
                     <h3>Lesson Tabs</h3>
                     <ul className="nav nav-tabs">
                         <li className="nav-item">
-                            {this.renderLessons()}
-                            <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}/lesson/${this.props.lesson.id}`}>
-                                {this.state.lessonId}
-                            </Link>
-                            <button onClick={() =>
-                            {this.props.delete(this.props.module.id)}}>
-                                DELETE
-                            </button>
+                            {this.state.lesson!=='' && this.renderLessons()}
                         </li>
                     </ul>
                 </div>

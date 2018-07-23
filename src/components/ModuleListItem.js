@@ -13,7 +13,7 @@ export default class ModuleListItem extends React.Component{
                  </Link>
                 <button onClick={() =>
                                 {this.props.delete(this.props.module.id)}}>
-                    DELETE
+                    <i className="fa fa-times"></i>
                 </button>
             </div>
         );
