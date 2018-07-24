@@ -2,8 +2,8 @@ import React from 'react'
 
 let _singleton = Symbol();
 
-const LESSON_API_URL =  'http://localhost:8080/api/course/CID/module/MID/lesson';
-const LESSON_ID_URL = 'http://localhost:8080/api/lesson';
+const LESSON_API_URL =  'https://webdev-server-java-mansijain.herokuapp.com/api/course/CID/module/MID/lesson';
+const LESSON_ID_URL = 'https://webdev-server-java-mansijain.herokuapp.com/api/lesson';
 
 export default class LessonService extends React.Component {
     constructor(singletonToken) {

@@ -1,7 +1,7 @@
 let _singleton = Symbol();
 
-const TOPIC_API_URL = 'http://localhost:8080/api/course/CID/module/MID/lesson/LID/topic';
-const TOPIC_ID_URL = 'http://localhost:8080/api/topic';
+const TOPIC_API_URL = 'https://webdev-server-java-mansijain.herokuapp.com/api/course/CID/module/MID/lesson/LID/topic';
+const TOPIC_ID_URL = 'https://webdev-server-java-mansijain.herokuapp.com/api/topic';
 export default class TopicService {
 
     constructor(singletonToken) {
