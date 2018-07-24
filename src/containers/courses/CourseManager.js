@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import CourseList from "./CourseList";
 import CourseEditor from "./CourseEditor";
 import ModuleEditor from "../modules/ModuleEditor";
+import LessonEditor from "../LessonEditor"
 
 export default class CourseManager extends React.Component {
     render() {
@@ -20,6 +21,9 @@ export default class CourseManager extends React.Component {
                     </Route>
                     <Route path="/course/:courseId/module/:moduleId"
                            component={ModuleEditor}>
+                    </Route>
+                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
+                           component={LessonEditor}>
                     </Route>
                 </div>
             </Router>

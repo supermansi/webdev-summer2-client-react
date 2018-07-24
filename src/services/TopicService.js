@@ -56,4 +56,34 @@ export default class TopicService {
         })
     }
 
+    findTopicById(topicId) {
+        return fetch(TOPIC_ID_URL.replace('TID', topicId))
+            .then(function (response) {
+                return response.json();
+            });
+    }
+
+    findAllTopics() {
+        return fetch(TOPIC_ID_URL)
+            .then(function (response) {
+                return response.json();
+            });
+    }
+
+
+    updateTopic(topicId, topic) {
+        return fetch(TOPIC_ID_URL
+                .replace('TID', topicId), {
+                    method: 'PUT',
+                    body: JSON.stringify(topic),
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                }
+        )
+        .then(function (response) {
+            return response.json();
+        });
+    }
+
 }

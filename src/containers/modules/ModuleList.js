@@ -100,7 +100,9 @@ export default class ModuleList extends React.Component {
                         <input placeholder="New Module"
                                 onChange = {this.setModuleTitle}
                                value={this.state.module.title}/>
-                        <button onClick={this.createModule}>Create</button>
+                        <button onClick={this.createModule}>
+                            <i className="fa fa-plus"></i>
+                        </button>
 
                         {this.renderModules()}
                     </div>

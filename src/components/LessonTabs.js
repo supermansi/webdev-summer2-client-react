@@ -14,8 +14,10 @@ export default class LessonTabs extends React.Component {
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
         this.setLessonId = this.setLessonId.bind(this);
+        this.setLessonTitle = this.setLessonTitle.bind(this);
+        this.createLesson = this.createLesson.bind(this);
+        this.deleteLesson = this.deleteLesson.bind(this);
         this.lessonService = LessonService.instance;
-
     }
 
     componentDidMount(){
@@ -62,6 +64,29 @@ export default class LessonTabs extends React.Component {
         })
     }
 
+    setLessonTitle(event) {
+        this.setState({lesson: {
+                title : event.target.value
+            }});
+    }
+
+    createLesson() {
+        this.lessonService
+            .createLesson(this.state.courseId,
+                this.state.moduleId,
+                this.state.lesson)
+            .then(() => this.findAllLessonsForModule(this.state.courseId,
+                                                     this.state.moduleId));
+    }
+
+    deleteLesson(lessonId) {
+        this.lessonService
+            .deleteLesson(lessonId)
+            .then(() =>
+            this.findAllLessonsForModule(this.state.courseId,
+                                         this.state.moduleId));
+    }
+
     renderLessons() {
         console.log(this.state.lessons);
         var tabs = this.state.lessons.map(lesson =>
@@ -83,6 +108,12 @@ export default class LessonTabs extends React.Component {
             <Router>
                 <div>
                     <h3>Lesson Tabs</h3>
+                    <div>
+                        <input placeholder="New Lesson"
+                               onChange = {this.setLessonTitle}
+                               value={this.state.lesson.title}/>
+                        <button onClick={this.createLesson}>Create</button>
+                    </div>
                     <ul className="nav nav-tabs">
                         <li className="nav-item">
                             {this.state.lesson!=='' && this.renderLessons()}

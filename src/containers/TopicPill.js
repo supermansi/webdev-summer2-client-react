@@ -1,5 +1,4 @@
 import React from 'react'
-import TopicPillItem from '../components/TopicPillItem'
 
 export default class LessonEditor extends React.Component {
 
@@ -8,23 +7,27 @@ export default class LessonEditor extends React.Component {
         this.state = {
             courseId : "",
             moduleId : "",
-            lessonId : ""
+            lessonId : "",
+            topicId : ""
         }
         this.setCourseId=this.setCourseId.bind(this);
         this.setModuleId=this.setModuleId.bind(this);
         this.setLessonId=this.setLessonId.bind(this);
+        this.setTopidId=this.setTopidId.bind(this);
     }
 
     componentDidMount(){
         this.setCourseId(this.props.match.params.courseId);
         this.setModuleId(this.props.match.params.moduleId);
         this.setLessonId(this.props.match.params.lessonId);
+        this.setTopicId(this.props.match.params.topicId);
     }
 
     componentWillReceiveProps(newProps){
         this.setCourseId(newProps.match.params.courseId);
         this.setModuleId(newProps.match.params.moduleId);
         this.setLessonId(newProps.match.params.lessonId);
+        this.setTopidId(newProps.match.params.topicId);
     }
 
     setCourseId(courseId){
@@ -39,12 +42,14 @@ export default class LessonEditor extends React.Component {
         this.setState({lessonId:lessonId})
     }
 
+    setTopicId(topicId){
+        this.setState({topicId:topicId})
+    }
+
     render() {
         return(
             <div>
-                {this.state.lessonId!==''&&<TopicPillItem courseId={this.state.courseId}
-                                                        moduleId={this.state.moduleId}
-                                                        lessonId={this.state.lessonId}/>}
+                <h1>Topic Details</h1>
             </div>
         );
     }
