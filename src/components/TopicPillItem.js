@@ -1,5 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import TopicPill from '../containers/TopicPill'
 import TopicService from '../services/TopicService'
 
 export default class LessonTabs extends React.Component {
@@ -61,7 +62,10 @@ export default class LessonTabs extends React.Component {
     }
 
     findAllTopicsForLesson(courseId, moduleId, lessonId) {
-        this.lessonService
+        console.log(courseId);
+        console.log(moduleId);
+        console.log(lessonId);
+        this.topicService
             .findAllTopicsForLesson(courseId, moduleId, lessonId)
             .then(topics => {this.setTopics(topics)});
     }
@@ -98,10 +102,9 @@ export default class LessonTabs extends React.Component {
     }
 
     renderTopics() {
-        console.log("rendering topics " + this.state.topics);
         var tabs = this.state.topics.map(topic =>
             <div>
-                <Link to={`/course/${this.state.courseId}/module/${this.props.moduleId}/lesson/${lesson.id}/topic/${topic.id}`}>
+                <Link to={`/course/${this.state.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${topic.id}`}>
                     {topic.title}
                 </Link>
                 <button onClick={() =>

@@ -1,6 +1,7 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import LessonService from '../services/LessonService'
+import LessonEditor from "../containers/LessonEditor";
 
 export default class LessonTabs extends React.Component {
     constructor(props){
@@ -92,7 +93,9 @@ export default class LessonTabs extends React.Component {
         var tabs = this.state.lessons.map(lesson =>
                     <div>
                         <Link to={`/course/${this.state.courseId}/module/${this.props.moduleId}/lesson/${lesson.id}`}>
-                            {lesson.title}
+                            <li className="nav nav-tabs">
+                                {lesson.title}
+                            </li>
                         </Link>
                         <button onClick={() =>
                         {this.deleteLesson(lesson.id)}}>
@@ -115,10 +118,13 @@ export default class LessonTabs extends React.Component {
                         <button onClick={this.createLesson}>Create</button>
                     </div>
                     <ul className="nav nav-tabs">
-                        <li className="nav-item">
+                        {/*<li className="nav-item">*/}
                             {this.state.lesson!=='' && this.renderLessons()}
-                        </li>
+                        {/*</li>*/}
                     </ul>
+                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
+                           component={LessonEditor}>
+                    </Route>
                 </div>
             </Router>
         );

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class LessonEditor extends React.Component {
+export default class TopicPill extends React.Component {
 
     constructor(props){
         super(props);
@@ -13,7 +13,7 @@ export default class LessonEditor extends React.Component {
         this.setCourseId=this.setCourseId.bind(this);
         this.setModuleId=this.setModuleId.bind(this);
         this.setLessonId=this.setLessonId.bind(this);
-        this.setTopidId=this.setTopidId.bind(this);
+        this.setTopicId=this.setTopicId.bind(this);
     }
 
     componentDidMount(){
@@ -27,7 +27,7 @@ export default class LessonEditor extends React.Component {
         this.setCourseId(newProps.match.params.courseId);
         this.setModuleId(newProps.match.params.moduleId);
         this.setLessonId(newProps.match.params.lessonId);
-        this.setTopidId(newProps.match.params.topicId);
+        this.setTopicId(newProps.match.params.topicId);
     }
 
     setCourseId(courseId){
