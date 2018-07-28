@@ -1,8 +1,8 @@
 let initialState = {
     widgets: [
-        {title: 'Widget 1', id: 1, widgetType: 'WT1'},
-        {title: 'Widget 2', id: 2, widgetType: 'WT2'},
-        {title: 'Widget 3', id: 3, widgetType: 'WT3'},
+        {title: 'Heading Widget 1', id: 1, widgetType: 'HEADING'},
+        {title: 'List Widget 1', id: 2, widgetType: 'LIST', listItems: 'item1\nitem2\nitem3', ordered: true},
+        {title: 'Widget 3', id: 3, widgetType: 'WT1'},
         {title: 'Widget 4', id: 4, widgetType: 'WT2'},
         {title: 'Widget 5', id: 5, widgetType: 'WT3'}
     ]
@@ -30,8 +30,7 @@ export const reducer = (state = initialState, action) => {
             return {
                 widgets: state.widgets.map(widget => {
                         if(widget.id === action.widget.id) {
-                            widget.widgetType = action.widget.widgetType;
-                            return widget;
+                            return action.widget;
                         }
                         else {
                             return widget;

@@ -17,7 +17,7 @@ export const WidgetType2 = ({widget, updateWidget}) => {
                         widget.widgetType = '';
                         updateWidget(newWidget);
                     }}>
-                <option value="" selected disabled hidden>Choose here</option>
+                <option value="" disabled hidden>Change type</option>
                 <option value="WT1">Widget Type 1</option>
                 <option value="WT2">Widget Type 2</option>
                 <option value="WT3">Widget Type 3</option>
