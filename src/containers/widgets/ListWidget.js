@@ -19,12 +19,13 @@ export const ListWidget = ({widget, updateWidget}) => {
                 <input type="checkbox"
                        ref = {node => ordered = node}
                        checked={widget.ordered}
-                        onClick={() => {
+                        onChange={() => {
                             widget.ordered = ordered.checked
                             updateWidget(widget)
                         }}/>Ordered
             </label>
             <h4>Preview</h4>
+            {/*{console.log(widget.ordered)}*/}
             {widget.ordered &&
                 <ol>
                     {widget.listItems.split('\n').map( (item, index) => (

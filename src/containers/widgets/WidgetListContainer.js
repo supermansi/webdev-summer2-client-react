@@ -8,7 +8,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     deleteWidget: (widgetId) => dispatch({type: 'DELETE_WIDGET', widgetId: widgetId}),
     createWidget: (widget) => dispatch({type: 'CREATE_WIDGET', widget: widget}),
-    updateWidget: (widget) => dispatch({type: 'UPDATE_WIDGET', widget: widget})
+    updateWidget: (widget) => dispatch({type: 'UPDATE_WIDGET', widget: widget}),
+    saveWidgets: () => dispatch({type: 'SAVE_WIDGETS'})
 })
 
 export const WidgetListContainer = connect(mapStateToProps, mapDispatchToProps)(WidgetListComponent)

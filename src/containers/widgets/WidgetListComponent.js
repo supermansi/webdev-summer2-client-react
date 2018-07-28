@@ -5,6 +5,7 @@ import {WidgetType2} from "./WidgetType2";
 import {WidgetType3} from "./WidgetType3";
 import {HeadingWidget} from "./HeadingWidget";
 import {ListWidget} from "./ListWidget";
+import {YouTubeWidget} from "./YouTubeWidget";
 
 export const WidgetListComponent = ({widgets, createWidget, deleteWidget, updateWidget}) => {
     let widgetTitle;
@@ -13,6 +14,10 @@ export const WidgetListComponent = ({widgets, createWidget, deleteWidget, update
     return (
         <div className="col-8 pull-right">
             <h1>Widget List Component</h1>
+            <button className="btn btn-outline-primary"
+                    onClick={saveWidgets}>
+                Save
+            </button>
             <ul className="list-group">
                 <li className="list-group-item">
                     <input ref={node => widgetTitle = node}
@@ -25,6 +30,7 @@ export const WidgetListComponent = ({widgets, createWidget, deleteWidget, update
                         <option value="WT3">Widget Type 3</option>
                         <option value="HEADING">Heading</option>
                         <option value="LIST">List</option>
+                        <option value="YOUTUBE">YouTube Video</option>
                     </select>
                     <button className="btn btn-outline-primary pull-right col-3"
                             onClick={() => {
@@ -40,20 +46,24 @@ export const WidgetListComponent = ({widgets, createWidget, deleteWidget, update
                     </button>
                 </li>
                 {widgets.map((widget, index) =>
-                    <li className="list-group-item"
-                        key={index}>
-                        <button className="btn btn-outline-danger pull-right"
-                                onClick={() => deleteWidget(widget.id)}>
-                            <i className="fa fa-trash"></i>
-                        </button>
-                        <div>
-                            {widget.widgetType === 'WT1' && <WidgetType1 widget={widget} updateWidget={updateWidget}/>}
-                            {widget.widgetType === 'WT2' && <WidgetType2 widget={widget} updateWidget={updateWidget}/>}
-                            {widget.widgetType === 'WT3' && <WidgetType3 widget={widget} updateWidget={updateWidget}/>}
-                            {widget.widgetType === 'HEADING' && <HeadingWidget widget={widget} updateWidget={updateWidget}/>}
-                            {widget.widgetType === 'LIST' && <ListWidget widget={widget} updateWidget={updateWidget}/>}
-                        </div>
-                    </li>
+                    <div>
+                        <li className="list-group-item"
+                            key={index}>
+                            <button className="btn btn-outline-danger pull-right"
+                                    onClick={() => deleteWidget(widget.id)}>
+                                <i className="fa fa-trash"></i>
+                            </button>
+                            <div>
+                                {widget.widgetType === 'WT1' && <WidgetType1 widget={widget} updateWidget={updateWidget}/>}
+                                {widget.widgetType === 'WT2' && <WidgetType2 widget={widget} updateWidget={updateWidget}/>}
+                                {widget.widgetType === 'WT3' && <WidgetType3 widget={widget} updateWidget={updateWidget}/>}
+                                {widget.widgetType === 'HEADING' && <HeadingWidget widget={widget} updateWidget={updateWidget}/>}
+                                {widget.widgetType === 'LIST' && <ListWidget widget={widget} updateWidget={updateWidget}/>}
+                                {widget.widgetType === 'YOUTUBE' && <YouTubeWidget widget={widget} updateWidget={updateWidget}/>}
+                            </div>
+                        </li>
+                        <hr/>
+                    </div>
                 )}
             </ul>
         </div>
