@@ -13,7 +13,14 @@ export const reducer = (state = initialState, action) => {
     switch(action.type){
 
         case 'SAVE_WIDGETS':
-            
+            fetch('http://localhost:8080/api/widget', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(state.widgets)
+            });
+            return state;
             break;
 
         case 'DELETE_WIDGET':

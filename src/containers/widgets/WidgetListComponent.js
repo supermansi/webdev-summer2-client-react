@@ -7,7 +7,7 @@ import {HeadingWidget} from "./HeadingWidget";
 import {ListWidget} from "./ListWidget";
 import {YouTubeWidget} from "./YouTubeWidget";
 
-export const WidgetListComponent = ({widgets, createWidget, deleteWidget, updateWidget}) => {
+export const WidgetListComponent = ({widgets, createWidget, deleteWidget, updateWidget, saveWidgets}) => {
     let widgetTitle;
     let widgetType;
 
