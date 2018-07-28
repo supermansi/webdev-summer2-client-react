@@ -24,6 +24,22 @@ export const reducer = (state = initialState, action) => {
                     //{title: 'NEW WIDGET', id: (new Date()).getTime()}
                 ]
             }
+            break;
+
+        case 'UPDATE_WIDGET':
+            return {
+                widgets: state.widgets.map(widget => {
+                        if(widget.id === action.widget.id) {
+                            widget.widgetType = action.widget.widgetType;
+                            return widget;
+                        }
+                        else {
+                            return widget;
+                        }
+                    })
+            }
+            break;
+
         default:
             return state;
     }
