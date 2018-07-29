@@ -19,7 +19,7 @@ export const ListWidget = ({widget, updateWidget}) => {
                 <input type="checkbox"
                        ref = {node => ordered = node}
                        checked={widget.ordered}
-                        onChange={() => {
+                       onChange={() => {
                             widget.ordered = ordered.checked
                             updateWidget(widget)
                         }}/>Ordered

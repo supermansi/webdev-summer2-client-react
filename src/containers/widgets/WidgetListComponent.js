@@ -6,6 +6,8 @@ import {WidgetType3} from "./WidgetType3";
 import {HeadingWidget} from "./HeadingWidget";
 import {ListWidget} from "./ListWidget";
 import {YouTubeWidget} from "./YouTubeWidget";
+import {ParagraphWidget} from "./ParagraphWidget";
+import {ImageWidget} from "./ImageWidget";
 
 export const WidgetListComponent = ({widgets, createWidget, deleteWidget, updateWidget, saveWidgets}) => {
     let widgetTitle;
@@ -24,13 +26,15 @@ export const WidgetListComponent = ({widgets, createWidget, deleteWidget, update
                            className="form-control"/>
                     <select className="form-control"
                             ref={node => widgetType = node}>
-                        <option value="" selected="" disabled>Choose widget type</option>
+                        {/*<option value="" selected="" disabled>Choose widget type</option>
                         <option value="WT1">Widget Type 1</option>
                         <option value="WT2">Widget Type 2</option>
-                        <option value="WT3">Widget Type 3</option>
+                        <option value="WT3">Widget Type 3</option>*/}
                         <option value="HEADING">Heading</option>
                         <option value="LIST">List</option>
                         <option value="YOUTUBE">YouTube Video</option>
+                        <option value="PARAGRAPH">Paragraph</option>
+                        <option value="IMAGE">Image</option>
                     </select>
                     <button className="btn btn-outline-primary pull-right col-3"
                             onClick={() => {
@@ -54,12 +58,11 @@ export const WidgetListComponent = ({widgets, createWidget, deleteWidget, update
                                 <i className="fa fa-trash"></i>
                             </button>
                             <div>
-                                {widget.widgetType === 'WT1' && <WidgetType1 widget={widget} updateWidget={updateWidget}/>}
-                                {widget.widgetType === 'WT2' && <WidgetType2 widget={widget} updateWidget={updateWidget}/>}
-                                {widget.widgetType === 'WT3' && <WidgetType3 widget={widget} updateWidget={updateWidget}/>}
                                 {widget.widgetType === 'HEADING' && <HeadingWidget widget={widget} updateWidget={updateWidget}/>}
                                 {widget.widgetType === 'LIST' && <ListWidget widget={widget} updateWidget={updateWidget}/>}
                                 {widget.widgetType === 'YOUTUBE' && <YouTubeWidget widget={widget} updateWidget={updateWidget}/>}
+                                {widget.widgetType === 'PARAGRAPH' && <ParagraphWidget widget={widget} updateWidget={updateWidget}/>}
+                                {widget.widgetType === 'IMAGE' && <ImageWidget widget={widget} updateWidget={updateWidget}/>}
                             </div>
                         </li>
                         <hr/>

@@ -1,11 +1,10 @@
 let initialState = {
     widgets: [
-        {title: 'Heading Widget 1', id: 1, widgetType: 'HEADING'},
-        {title: 'List Widget 1', id: 2, widgetType: 'LIST', listItems: 'item1\nitem2\nitem2', ordered: true},
-        {title: 'YouTube Widget', id: 3, widgetType: 'YOUTUBE'},
-        {title: 'Widget 3', id: 3, widgetType: 'WT1'},
-        {title: 'Widget 4', id: 4, widgetType: 'WT2'},
-        {title: 'Widget 5', id: 5, widgetType: 'WT3'}
+        {order: 1, title: 'Heading Widget 1', id: 1, widgetType: 'HEADING'},
+        {order: 2, title: 'List Widget 1', id: 2, widgetType: 'LIST', listItems: 'item1\nitem2\nitem2', ordered: true},
+        {order: 3, title: 'YouTube Widget', id: 3, widgetType: 'YOUTUBE'},
+        {order: 4, title: 'Paragraph Widget', id: 4, widgetType: 'PARAGRAPH'},
+        {order: 5, title: 'Image Widget', id: 5, widgetType: 'IMAGE'}
     ]
 };
 
@@ -32,8 +31,8 @@ export const reducer = (state = initialState, action) => {
         case 'CREATE_WIDGET':
             return {
                 widgets: [
+                    ...state.widgets,
                     action.widget,
-                    ...state.widgets
                     //{title: 'NEW WIDGET', id: (new Date()).getTime()}
                 ]
             }
