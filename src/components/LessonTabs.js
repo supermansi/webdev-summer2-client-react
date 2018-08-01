@@ -89,7 +89,7 @@ export default class LessonTabs extends React.Component {
     }
 
     renderLessons() {
-        console.log(this.state.lessons);
+        console.log(this.state);
         var tabs = this.state.lessons.map(lesson =>
                     <div>
                         <Link to={`/course/${this.state.courseId}/module/${this.props.moduleId}/lesson/${lesson.id}`}>
@@ -122,9 +122,6 @@ export default class LessonTabs extends React.Component {
                             {this.state.lesson!=='' && this.renderLessons()}
                         {/*</li>*/}
                     </ul>
-                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
-                           component={LessonEditor}>
-                    </Route>
                 </div>
             </Router>
         );

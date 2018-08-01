@@ -12,7 +12,6 @@ export default class WidgetListComponent extends React.Component {
         let widgetTitle;
         let widgetType;
         this.props.loadAllWidgets();
-
     }
 
 /*    componentWillReceiveProps(newProps) {
@@ -27,54 +26,70 @@ export default class WidgetListComponent extends React.Component {
                         onClick={this.props.saveWidgets}>
                     Save
                 </button>
+                <button className="btn btn-outline-primary"
+                        onClick={this.props.saveWidgets}>
+                    Preview
+                </button>
                 <ul className="list-group">
-                    <li className="list-group-item">
+                    {/*<li className="list-group-item">
                         <input ref={node => this.widgetTitle = node}
                                className="form-control"/>
                         <select className="form-control"
-                                ref={node => this.widgetType = node}>
-                            {/*<option value="" selected="" disabled>Choose widget type</option>
+                                ref={node => this.widgetType = node}
+                                onChange={() => {
+                                    this.widget.widgetType = this.widgetType;
+                                    this.props.updateWidget(this.widget);
+                                }}>
+                            <option value="" selected="" disabled>Choose widget type</option>
                         <option value="WT1">Widget Type 1</option>
                         <option value="WT2">Widget Type 2</option>
-                        <option value="WT3">Widget Type 3</option>*/}
+                        <option value="WT3">Widget Type 3</option>
                             <option value="HEADING">Heading</option>
                             <option value="LIST">List</option>
                             <option value="PARAGRAPH">Paragraph</option>
                             <option value="IMAGE">Image</option>
                             <option value="LINK">Link</option>
                         </select>
-                        <button className="btn btn-outline-primary pull-right col-3"
-                                onClick={() => {
-                                    let widget = {
-                                        title: this.widgetTitle.value,
-                                        id: (new Date()).getTime(),
-                                        widgetType: this.widgetType.value
-                                    }
-                                    this.widgetTitle.value = '';
-                                    this.props.createWidget(widget)
-                                }}>
-                            <i className="fa fa-plus"></i>
-                        </button>
-                    </li>
+
+                    </li>*/}
+                    {/*{console.log(this.props.widgets)}*/}
                     {this.props.widgets.map((widget, index) =>
                         <div>
                             <li className="list-group-item"
                                 key={index}>
-                                {widget.id}
+                                {/*{widget.id}*/}
                                 <button className="btn btn-outline-danger pull-right"
                                         onClick={() => this.props.deleteWidget(widget.id)}>
                                     <i className="fa fa-trash"></i>
                                 </button>
-                                <button className="btn btn-outline-warning float-right"
+                                <button className="btn btn-outline-warning pull-right"
                                         onClick={() => this.props.down(widget.id)}>
                                     <i className="fa fa-arrow-down"></i>
                                     {/*Down*/}
                                 </button>
-                                <button className="btn btn-outline-warning float-right"
+                                <button className="btn btn-outline-warning pull-right"
                                         onClick={() => this.props.up(widget.id)}>
                                     <i className="fa fa-arrow-up"></i>
                                     {/*Up*/}
                                 </button>
+                                <select className="form-control btn-outline-primary col-3 pull-right"
+                                        ref = {node => this.widgetType = node}
+                                        onChange={() => {
+                                            let newWidget = {
+                                                id1: widget.id1,
+                                                widgetType: this.widgetType.value
+                                            }
+                                            // console.log(widget);
+                                            //                                             // console.log(newWidget);
+                                            //widget.widgetType = this.widgetType;
+                                            this.props.selectWidget(newWidget);
+                                        }}>
+                                    <option value="HEADING">Heading</option>
+                                    <option value="LIST">List</option>
+                                    <option value="PARAGRAPH">Paragraph</option>
+                                    <option value="IMAGE">Image</option>
+                                    <option value="LINK">Link</option>
+                                </select>
                                 <div>
                                     {widget.widgetType === 'HEADING' && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget}/>}
                                     {widget.widgetType === 'LIST' && <ListWidget widget={widget} updateWidget={this.props.updateWidget}/>}
@@ -83,6 +98,16 @@ export default class WidgetListComponent extends React.Component {
                                     {widget.widgetType === 'LINK' && <LinkWidget widget={widget} updateWidget={this.props.updateWidget}/>}
                                 </div>
                             </li>
+                            <button className="btn btn-outline-primary pull-right"
+                                    onClick={() => {
+                                        let widget = {
+                                            id1: (new Date()).getTime(),
+                                            widgetType: 'HEADING'
+                                        }
+                                        this.props.createWidget(widget)
+                                    }}>
+                                <i className="fa fa-plus"></i>
+                            </button>
                             <hr/>
                         </div>
                     )}

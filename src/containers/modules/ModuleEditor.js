@@ -30,6 +30,7 @@ export default class ModuleEditor extends React.Component{
         this.setState({moduleId: moduleId});
     }
     render(){
+        console.log("i'm here");
         return(
             <div>
                 {this.state.moduleId!==''&&<LessonTabs courseId={this.state.courseId}

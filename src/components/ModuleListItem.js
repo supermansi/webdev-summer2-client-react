@@ -7,7 +7,7 @@ export default class ModuleListItem extends React.Component{
     }
     render() {
         return (
-            <div>
+            <div className="list-group-item">
                 <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
                     {this.props.module.title}
                  </Link>

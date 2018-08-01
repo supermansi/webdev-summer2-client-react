@@ -26,7 +26,7 @@ export default class CourseEditor extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className="container">
                 {this.state.courseId!==''&&<ModuleList courseId={this.state.courseId}/>}
                 {/*{this.state.courseId!=''&&<ModuleList courseId={this.state.courseId}/>}*/}
             </div>

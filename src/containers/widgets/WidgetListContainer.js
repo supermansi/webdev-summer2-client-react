@@ -10,6 +10,8 @@ const mapDispatchToProps = (dispatch) => ({
     createWidget: (widget) => dispatch({type: 'CREATE_WIDGET', widget: widget}),
     updateWidget: (widget) => dispatch({type: 'UPDATE_WIDGET', widget: widget}),
     saveWidgets: () => dispatch({type: 'SAVE_WIDGETS'}),
+    selectWidget: (widget) => dispatch({type: 'SELECT_WIDGET', widget: widget}),
+    previewWidgets: () => dispatch({type: 'PREVIEW_WIDGET'}),
     loadAllWidgets: () => {
         fetch('http://localhost:8080/api/widget')
             .then(response => response.json())

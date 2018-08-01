@@ -12,10 +12,23 @@ export const ListWidget = ({widget, updateWidget}) => {
                         onChange={ () => {
                             widget.listItems = text.value;
                             updateWidget(widget);
-                        }}>
-
+                        }}
+                        placeholder="Enter one list item per line">
             </textarea>
-            <label>
+            <label for="type">
+                Select List Type
+            </label>
+                <select className="form-control"
+                        ref = {node => ordered = node}
+                        onChange={() => {
+                            widget.ordered = ordered.value == 'ordered' ? true : false;
+                            updateWidget(widget)
+                        }}
+                        id="type">
+                    <option value="unordered">Unordered</option>
+                    <option value="ordered">Ordered</option>
+                </select>
+{/*            <label>
                 <input type="checkbox"
                        ref = {node => ordered = node}
                        checked={widget.ordered}
@@ -23,26 +36,28 @@ export const ListWidget = ({widget, updateWidget}) => {
                             widget.ordered = ordered.checked
                             updateWidget(widget)
                         }}/>Ordered
-            </label>
+            </label>*/}
             <h4>Preview</h4>
-            {/*{console.log(widget.ordered)}*/}
-            {widget.ordered &&
+            {/*{console.log(widget.listItems)}*/}
+            {widget.listItems &&
+                {widget.ordered &&
                 <ol>
-                    {widget.listItems.split('\n').map( (item, index) => (
-                        <li key={index}>
-                            {item}
-                        </li>
-                    ))}
+                {widget.listItems.split('\n').map((item, index) => (
+                    <li key={index}>
+                        {item}
+                    </li>
+                ))}
                 </ol>
             }
             {!widget.ordered &&
-                <ul>
-                    {widget.listItems.split('\n').map((item, index) => (
-                        <li key={index}>
-                            {item}
-                        </li>
-                    ))}
-                </ul>
+            <ul>
+                {widget.listItems.split('\n').map((item, index) => (
+                    <li key={index}>
+                        {item}
+                    </li>
+                ))}
+            </ul>
+            }
             }
         </div>
     );

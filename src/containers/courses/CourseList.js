@@ -16,8 +16,8 @@ export default class CourseList extends React.Component {
 
     componentDidMount() {
         this.findAllCourses();
-
     }
+
     findAllCourses() {
         this.courseService.findAllCourses()
             .then((courses) => {
@@ -29,14 +29,12 @@ export default class CourseList extends React.Component {
     }
 
     titleChanged(event) {
-/*
-        console.log(event.target.value);
-*/
+        //console.log(event.target);
         this.setState(
             {
                 course : {
                     title : event.target.value,
-                    dateModified : '',
+                    dateModified : '', //(new Date()).getDate(),
                     timeModified : '',
                     ownedBy : 'me'
                 }
@@ -45,7 +43,19 @@ export default class CourseList extends React.Component {
     }
 
     createCourse() {
-        //console.log(this.state.course);
+        //console.log(this.state.course=== undefined);
+        if(this.state.course === undefined){
+            this.setState(
+                {
+                    course: {
+                        title: 'New Course',
+                        dateModified: '',
+                        timeModified: '',
+                        ownedBy : 'me'
+                    }
+                }
+            );
+        }
         this.courseService
             .createCourse(this.state.course)
             .then(() => {this.findAllCourses();});
@@ -69,17 +79,16 @@ export default class CourseList extends React.Component {
 
     render() {
         return(
-                <div className="container row">
-                    <div className="col-12 border">
+                <div className="container border">
                         <h4>Course List</h4>
                         <table className="table table-hover">
                             <thead>
                                 <tr>
                                     <th>
                                         <input className="form-control"
-                                            id="titleFld"
-                                            placeholder="New Course"
-                                            onChange={this.titleChanged}/>
+                                               id="titleFld"
+                                               placeholder="New Course"
+                                               onChange={this.titleChanged}/>
                                     </th>
                                     <th>
                                         <button className="btn btn-primary"
@@ -99,7 +108,6 @@ export default class CourseList extends React.Component {
                                 {this.courseRows()}
                             </tbody>
                         </table>
-                    </div>
                 </div>
         );
     }

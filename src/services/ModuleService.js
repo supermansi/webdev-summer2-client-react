@@ -14,7 +14,6 @@ export default class ModuleService {
     }
 
     createModule(courseId, module) {
-        console.log(courseId);
         return fetch(MODULE_API_URL.replace('CID', courseId),
             {   body: JSON.stringify(module),
                 headers: { 'Content-Type': 'application/json' },
@@ -40,7 +39,6 @@ export default class ModuleService {
     }
 
     findAllModulesForCourse(courseId) {
-        console.log("from mod serv" + courseId);
         return  fetch(MODULE_API_URL
             .replace('CID', courseId))
             .then(function(response){

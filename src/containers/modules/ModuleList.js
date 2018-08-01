@@ -93,23 +93,23 @@ export default class ModuleList extends React.Component {
     render(){
         return(
             <Router>
-                <div className="row">
-                    <div className="col-4">
+                <div className="row list-group">
                         <h4>Module List</h4>
                         {/*<h4>Modules for {this.state.courseId} </h4>*/}
                         <input placeholder="New Module"
-                                onChange = {this.setModuleTitle}
-                               value={this.state.module.title}/>
-                        <button onClick={this.createModule}>
+                               onChange = {this.setModuleTitle}
+                               value={this.state.module.title}
+                               className="form-control"/>
+                        <button className="btn btn-outline-success"
+                                onClick={this.createModule}>
                             <i className="fa fa-plus"></i>
                         </button>
 
                         {this.renderModules()}
-                    </div>
-                    <div className="col-8">
+{/*                    <div className="col-8">
                         <Route path="/course/:courseId/module/:moduleId"
                                 component={ModuleEditor}/>
-                    </div>
+                    </div>*/}
                 </div>
             </Router>
         );

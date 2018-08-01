@@ -19,28 +19,39 @@ export default class CourseManager extends React.Component {
             <Provider store={store}>
                 <Router>
                     <div className="container">
-                        <Link to="/course">
-                            <h1>Course Manager</h1>
-                        </Link>
-                        <br />
-                        <Link to="widgets">
-                            <h1>Widgets</h1>
-                        </Link>
+                        <div>
+                            <Link to="/course">
+                                <h1>Course Manager</h1>
+                            </Link>
+                            <br />
+                            <Link to="widgets">
+                                <h1>Widgets</h1>
+                            </Link>
+                        </div>
                         <Route path="/widgets"
                                component={WidgetListContainer}>
                         </Route>
-                        <Route path="/course"
-                               component={CourseList}>
-                        </Route>
-                        <Route path="/course/:courseId/edit"
-                               component={CourseEditor}>
-                        </Route>
-                        <Route path="/course/:courseId/module/:moduleId"
-                               component={ModuleEditor}>
-                        </Route>
-                        {/*<Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
-                               component={LessonEditor}>
-                        </Route>*/}
+                        <div>
+                            <Route path="/course"
+                                   component={CourseList}>
+                            </Route>
+                            <div className="col-4">
+                                <Route path="/course/:courseId/edit"
+                                       component={CourseEditor}>
+                                </Route>
+                            </div>
+                            <div className="col-8">
+                                <Route path="/course/:courseId/module/:moduleId"
+                                       component={ModuleEditor}>
+                                </Route>
+                                <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
+                                       component={LessonEditor}>
+                                </Route>
+                            </div>
+                            {/*<Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
+                                   component={LessonEditor}>
+                            </Route>*/}
+                        </div>
                     </div>
                 </Router>
             </Provider>

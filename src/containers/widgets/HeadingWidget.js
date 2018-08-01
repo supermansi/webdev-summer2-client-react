@@ -19,7 +19,7 @@ export const HeadingWidget = ({widget, updateWidget}) => {
                         widget.text = text.value;
                         updateWidget(widget)
                     }}/>
-            {console.log(widget.text)}
+            {/*{console.log(widget.text)}*/}
             <label htmlFor="size">
                 Select Heading Size
             </label>
@@ -27,10 +27,10 @@ export const HeadingWidget = ({widget, updateWidget}) => {
                     className="form-control"
                     ref={node => size = node}
                     onChange={() => {
+                        console.log(size);
                         widget.size = size.value;
                         updateWidget(widget);
                     }}>
-                <option defaultValue="Choose" selected disabled>Choose Heading</option>
                 <option value="1">Heading 1</option>
                 <option value="2">Heading 2</option>
                 <option value="3">Heading 3</option>
