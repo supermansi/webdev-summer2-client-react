@@ -1,19 +1,22 @@
 import {connect} from 'react-redux'
 import WidgetListComponent from "./WidgetListComponent";
 
+const WIDGET_API_URL = "https://webdev-server-java-mansijain.herokuapp.com/topic/TID/widgets"
+
 const mapStateToProps = (state) => ({
-    widgets: state.widgets
+    widgets: state.widgets,
+    previewMode: state.preview
 })
 
 const mapDispatchToProps = (dispatch) => ({
     deleteWidget: (widgetId) => dispatch({type: 'DELETE_WIDGET', widgetId: widgetId}),
     createWidget: (widget) => dispatch({type: 'CREATE_WIDGET', widget: widget}),
     updateWidget: (widget) => dispatch({type: 'UPDATE_WIDGET', widget: widget}),
-    saveWidgets: () => dispatch({type: 'SAVE_WIDGETS'}),
+    saveWidgets: (topicId) => dispatch({type: 'SAVE_WIDGETS', topicId: topicId}),
     selectWidget: (widget) => dispatch({type: 'SELECT_WIDGET', widget: widget}),
-    previewWidgets: () => dispatch({type: 'PREVIEW_WIDGET'}),
+    preview: () => dispatch({type: 'PREVIEW_WIDGET'}),
     loadAllWidgets: () => {
-        fetch('http://localhost:8080/api/widget')
+        fetch('https://webdev-server-java-mansijain.herokuapp.com/api/widget')
             .then(response => response.json())
             .then(widgets => dispatch({
                 type: 'FIND_ALL_WIDGETS',

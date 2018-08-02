@@ -16,6 +16,7 @@ export default class TopicService {
     }
 
     createTopic(courseId, moduleId, lessonId, topic) {
+        console.log(topic);
         return fetch(
             TOPIC_API_URL
                 .replace('CID', courseId)

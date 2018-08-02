@@ -87,7 +87,7 @@ export default class LessonTabs extends React.Component {
             .createTopic(this.state.courseId,
                 this.state.moduleId,
                 this.state.lessonId,
-                this.state.topicId)
+                this.state.topic)
             .then(() => this.findAllTopicsForLesson(this.state.courseId,
                 this.state.moduleId, this.state.lessonId));
     }
@@ -102,9 +102,10 @@ export default class LessonTabs extends React.Component {
     }
 
     renderTopics() {
+        console.log(this.state.topics);
         var tabs = this.state.topics.map(topic =>
             <div>
-                <Link to={`/course/${this.state.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${topic.id}`}>
+                <Link to={`/topic/${topic.id}/widgets`}>
                     {topic.title}
                 </Link>
                 <button onClick={() =>
@@ -129,7 +130,8 @@ export default class LessonTabs extends React.Component {
                     </div>
                     <ul className="nav nav-tabs">
                         <li className="nav-item">
-                            {this.state.topic!=='' && this.renderTopics()}
+                            {console.log(this.state.topics)}
+                            {this.state.topics.length >0  && this.renderTopics()}
                         </li>
                     </ul>
                 </div>

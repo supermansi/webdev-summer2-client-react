@@ -28,7 +28,7 @@ export default class CourseManager extends React.Component {
                                 <h1>Widgets</h1>
                             </Link>
                         </div>
-                        <Route path="/widgets"
+                        <Route path="/topic/:topicId/widgets"
                                component={WidgetListContainer}>
                         </Route>
                         <div>

@@ -1,5 +1,5 @@
-//const COURSE_API_URL = 'https://webdev-server-java-mansijain.herokuapp.com/api/course';
-const COURSE_API_URL = 'http://localhost:8080/api/course';
+const COURSE_API_URL = 'https://webdev-server-java-mansijain.herokuapp.com/api/course';
+//const COURSE_API_URL = 'http://localhost:8080/api/course';
 let _singleton = Symbol();
 
 export default class CourseService {

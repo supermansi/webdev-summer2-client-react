@@ -12,22 +12,51 @@ export default class WidgetListComponent extends React.Component {
         let widgetTitle;
         let widgetType;
         this.props.loadAllWidgets();
+        this.state = {
+            topicId : '',
+            widgets : []
+        }
+        this.setTopicId = this.setTopicId.bind(this);
     }
 
-/*    componentWillReceiveProps(newProps) {
-        this.props.widgets = newProps.widgets
-    }*/
+    setTopicId(topicId){
+        this.setState({
+            topicId: topicId
+        });
+    }
+
+    componentDidMount(){
+        this.setTopicId(this.props.match.params.topicId);
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setTopicId(newProps.match.params.topicId);
+    }
+
+
 
     render (){
         return (
             <div className="col-8 pull-right">
                 <h1>Widget List Component</h1>
+                <button className="btn btn-outline-success pull-right"
+                        onClick={() => {
+                            let widget = {
+                                id1: (new Date()).getTime(),
+                                widgetType: 'HEADING'
+                            }
+                            this.props.createWidget(widget)
+                        }}
+                        hidden={this.props.previewMode}>
+                    <i className="fa fa-plus"></i>
+                </button>
                 <button className="btn btn-outline-primary"
-                        onClick={this.props.saveWidgets}>
+                        onClick={this.props.saveWidgets(this.state.topicId)}
+                        hidden={this.props.previewMode}>
                     Save
                 </button>
                 <button className="btn btn-outline-primary"
-                        onClick={this.props.saveWidgets}>
+                        onClick={this.props.preview}>
                     Preview
                 </button>
                 <ul className="list-group">
@@ -55,47 +84,64 @@ export default class WidgetListComponent extends React.Component {
                     {/*{console.log(this.props.widgets)}*/}
                     {this.props.widgets.map((widget, index) =>
                         <div>
+                            {console.log(widget)}
                             <li className="list-group-item"
                                 key={index}>
                                 {/*{widget.id}*/}
-                                <button className="btn btn-outline-danger pull-right"
-                                        onClick={() => this.props.deleteWidget(widget.id)}>
-                                    <i className="fa fa-trash"></i>
-                                </button>
-                                <button className="btn btn-outline-warning pull-right"
-                                        onClick={() => this.props.down(widget.id)}>
-                                    <i className="fa fa-arrow-down"></i>
-                                    {/*Down*/}
-                                </button>
-                                <button className="btn btn-outline-warning pull-right"
-                                        onClick={() => this.props.up(widget.id)}>
-                                    <i className="fa fa-arrow-up"></i>
-                                    {/*Up*/}
-                                </button>
-                                <select className="form-control btn-outline-primary col-3 pull-right"
-                                        ref = {node => this.widgetType = node}
-                                        onChange={() => {
-                                            let newWidget = {
-                                                id1: widget.id1,
-                                                widgetType: this.widgetType.value
-                                            }
-                                            // console.log(widget);
-                                            //                                             // console.log(newWidget);
-                                            //widget.widgetType = this.widgetType;
-                                            this.props.selectWidget(newWidget);
-                                        }}>
-                                    <option value="HEADING">Heading</option>
-                                    <option value="LIST">List</option>
-                                    <option value="PARAGRAPH">Paragraph</option>
-                                    <option value="IMAGE">Image</option>
-                                    <option value="LINK">Link</option>
-                                </select>
+                                <div hidden={this.props.previewMode}>
+                                    <button className="btn btn-outline-danger pull-right"
+                                            onClick={() => this.props.deleteWidget(widget.id)}>
+                                        <i className="fa fa-trash"></i>
+                                    </button>
+                                    <button className="btn btn-outline-warning pull-right"
+                                            onClick={() => this.props.down(widget.id)}>
+                                        <i className="fa fa-arrow-down"></i>
+                                        {/*Down*/}
+                                    </button>
+                                    <button className="btn btn-outline-warning pull-right"
+                                            onClick={() => this.props.up(widget.id)}>
+                                        <i className="fa fa-arrow-up"></i>
+                                        {/*Up*/}
+                                    </button>
+                                    <select className="form-control btn-outline-primary col-3 pull-right"
+                                            ref = {node => this.widgetType = node}
+                                            onChange={() => {
+                                                let newWidget = {
+                                                    id1: widget.id1,
+                                                    widgetType: this.widgetType.value
+                                                }
+                                                // console.log(widget);
+                                                //                                             // console.log(newWidget);
+                                                //widget.widgetType = this.widgetType;
+                                                this.props.selectWidget(newWidget);
+                                            }}>
+                                        <option value="HEADING">Heading</option>
+                                        <option value="LIST">List</option>
+                                        <option value="PARAGRAPH">Paragraph</option>
+                                        <option value="IMAGE">Image</option>
+                                        <option value="LINK">Link</option>
+                                    </select>
+                                </div>
                                 <div>
-                                    {widget.widgetType === 'HEADING' && <HeadingWidget widget={widget} updateWidget={this.props.updateWidget}/>}
-                                    {widget.widgetType === 'LIST' && <ListWidget widget={widget} updateWidget={this.props.updateWidget}/>}
-                                    {widget.widgetType === 'PARAGRAPH' && <ParagraphWidget widget={widget} updateWidget={this.props.updateWidget}/>}
-                                    {widget.widgetType === 'IMAGE' && <ImageWidget widget={widget} updateWidget={this.props.updateWidget}/>}
-                                    {widget.widgetType === 'LINK' && <LinkWidget widget={widget} updateWidget={this.props.updateWidget}/>}
+                                    {widget.widgetType === 'HEADING' && <HeadingWidget widget={widget}
+                                                                                       updateWidget={this.props.updateWidget}
+                                                                                       preview={this.props.previewMode}/>}
+
+                                    {widget.widgetType === 'LIST' && <ListWidget widget={widget}
+                                                                                 updateWidget={this.props.updateWidget}
+                                                                                 preview={this.props.previewMode}/>}
+
+                                    {widget.widgetType === 'PARAGRAPH' && <ParagraphWidget widget={widget}
+                                                                                           updateWidget={this.props.updateWidget}
+                                                                                           preview={this.props.previewMode}/>}
+
+                                    {widget.widgetType === 'IMAGE' && <ImageWidget widget={widget}
+                                                                                   updateWidget={this.props.updateWidget}
+                                                                                   preview={this.props.previewMode}/>}
+
+                                    {widget.widgetType === 'LINK' && <LinkWidget widget={widget}
+                                                                                 updateWidget={this.props.updateWidget}
+                                                                                 preview={this.props.previewMode}/>}
                                 </div>
                             </li>
                             <button className="btn btn-outline-primary pull-right"
@@ -105,7 +151,8 @@ export default class WidgetListComponent extends React.Component {
                                             widgetType: 'HEADING'
                                         }
                                         this.props.createWidget(widget)
-                                    }}>
+                                    }}
+                                    hidden={this.props.previewMode}>
                                 <i className="fa fa-plus"></i>
                             </button>
                             <hr/>

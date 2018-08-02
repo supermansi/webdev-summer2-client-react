@@ -9,6 +9,8 @@ let initialState = {
     preview: false
 };
 
+const WIDGET_URL = 'https://webdev-server-java-mansijain.herokuapp.com/api/topic/TID/widget'
+
 export const reducer = (state = initialState, action) => {
     let fromIndex;
     let toIndex;
@@ -18,28 +20,65 @@ export const reducer = (state = initialState, action) => {
 
         case 'UP':
             console.log(action.widgetId + 'going up');
+/*
             fromIndex = state.widgets.findIndex((widget) => widget.id === action.widgetId);
             toIndex = fromIndex--;
             state.widgets.splice(toIndex, 0, state.widgets.splice(fromIndex, 1)[0]);
             let widgets = Object.assign(state.widgets)
             console.log(fromIndex);
-            return {widgets: state.widgets};
+*/
+            return {widgets: state.widgets.map(widget => {
+                if(widget.order === action.order) {
+                    widget.order += 1;
+                    return Object.assign({}, widget)
+                }
+
+                if(widget.order === (action.order + 1)) {
+                    widget.order -= 1;
+                    return Object.assign({}, widget)
+                }
+                return Object.assign({}, widget)
+            })
+                .sort(function(x,y) {
+                    return (x.order > y.order) ? 1 : (y.order > x.order) ? -1 : 0;
+                })
+        };
 
         case 'DOWN':
             console.log(action.widgetId + 'going down');
-            fromIndex = state.widgets.findIndex((widget) => widget.id === action.widgetId);
+/*            fromIndex = state.widgets.findIndex((widget) => widget.id === action.widgetId);
             toIndex = fromIndex++;
-            console.log(fromIndex);
-            return  state;
+            console.log(fromIndex);*/
+            return {widgets: state.widgets.map(widget => {
+                    if(widget.order === action.order) {
+                        widget.order -= 1;
+                        return Object.assign({}, widget)
+                    }
 
-        case 'FIND_ALL_WIDGETS':
-            console.log(action.widgets);
-            return {
-                widgets: action.widgets
+                    if(widget.order === (action.order - 1)) {
+                        widget.order += 1;
+                        return Object.assign({}, widget)
+                    }
+
+                    return Object.assign({}, widget)
+                })
+                    .sort(function(x,y) {
+                        return (x.order > y.order) ? 1 : (y.order > x.order) ? -1 : 0;
+                    })
             };
 
+        case 'FIND_ALL_WIDGETS':
+            //console.log(action.widgets);
+            newState = Object.assign({}, state)
+            newState.widgets = action.widgets
+            fetch("https://webdev-server-java-mansijain.herokuapp.com/api/widget")
+            return newState;
+            /*{
+                widgets: action.widgets
+            };*/
+
         case 'SAVE_WIDGETS':
-            fetch('http://localhost:8080/api/widget', {
+            fetch(WIDGET_URL.replace('TID', action.topicId), {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -50,7 +89,7 @@ export const reducer = (state = initialState, action) => {
 
         case 'DELETE_WIDGET':
             let widgetId = action.widgetId;
-            fetch('http://localhost:8080/api/widget/' + widgetId, {
+            fetch('https://webdev-server-java-mansijain.herokuapp.com/api/widget/' + widgetId, {
                 method: 'DELETE'
             })
             return {
@@ -58,10 +97,15 @@ export const reducer = (state = initialState, action) => {
             };
 
         case 'CREATE_WIDGET':
+            //action.widget.order = state.widgets.length;
+            //console.log(action.widget);
+            let newWidget = Object.assign({}, action.widget)
+            newWidget.order = state.widgets.length;
+            console.log(newWidget)
             return {
                 widgets: [
                     ...state.widgets,
-                    action.widget,
+                    newWidget
                     //{title: 'NEW WIDGET', id: (new Date()).getTime()}
                 ]
             };
@@ -93,8 +137,12 @@ export const reducer = (state = initialState, action) => {
             };
 
         case 'PREVIEW_WIDGET':
-            newState = Object.assign({}, state);
-            newState.preview != newState.preview;
+            // newState = Object.assign({}, state);
+            // newState.preview = !state.preview;
+            return {
+                widgets: state.widgets,
+                preview: !state.preview
+            }
 
         default:
             return state;
